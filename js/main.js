@@ -148,7 +148,7 @@ document.getElementById('requestQuote').addEventListener('submit', function (eve
         });
   
     // Clear form fields
-    document.getElementById('requestQuote').reset();
+    document.getElementById('requestQuote2').reset();
   });
 
 
