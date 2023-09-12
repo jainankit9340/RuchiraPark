@@ -109,7 +109,6 @@ document.getElementById('requestQuote').addEventListener('submit', function (eve
       from_email: document.getElementById("emailb").value,
       from_mnumber: "Mobile Number: " + document.getElementById("mnumberb").value,
       from_bhk: selectedBHKOptions.length > 0 ? "Enquired for: " + selectedBHKOptions.join(", ") : "Enquired for: None",
-    //   from_date: "Visit Date :" + document.getElementById("date").value
   };
 
   // Send email
