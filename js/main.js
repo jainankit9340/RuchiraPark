@@ -84,46 +84,72 @@ document.getElementById('emailForm').addEventListener('submit', function (event)
    document.getElementById('emailForm').reset();
 });
 
-
 document.getElementById('requestQuote').addEventListener('submit', function (event) {
-  event.preventDefault();
-
-  // Initialize EmailJS with your user ID
-  emailjs.init("KRks2szaYEUCKdkfM");
-
-  // Prepare email parameters
-  var selectedBHKOptions = [];
-  var bhkCheckboxes = document.getElementsByName("bhk_option");
+    event.preventDefault();
   
-  // Loop through checkboxes to get selected values
-  for (var i = 0; i < bhkCheckboxes.length; i++) {
-      if (bhkCheckboxes[i].checked) {
-          selectedBHKOptions.push(bhkCheckboxes[i].value);
-      }
-  }
+    // Initialize EmailJS with your user ID
+    emailjs.init("KRks2szaYEUCKdkfM");
+  
+    var selectedBHKOptions = [];
+    var bhkCheckboxes = document.getElementsByName("bhk_option");
+    
+    for (var i = 0; i < bhkCheckboxes.length; i++) {
+        if (bhkCheckboxes[i].checked) {
+            selectedBHKOptions.push(bhkCheckboxes[i].value);
+        }
+    }
+    console.log(selectedBHKOptions); // Log the selected options  
+    
+  
+    // Prepare email parameters
+    var params = {
+        from_builder: "Park East",
+        from_name: document.getElementById("nameb").value,
+        from_email: document.getElementById("emailb").value,
+        from_mnumber: "Mobile Number: " + document.getElementById("mnumberb").value,
+        from_bhk: selectedBHKOptions.length > 0 ? "Enquired for: " + selectedBHKOptions.join(", ") : "Enquired for: None",
+    };
+  
+    // Send email
+    emailjs.send("service_jgfvwvc", "template_q4t01zo" , params)
+        .then(function(response) {
+            document.getElementById("close_modal2").click();
+            window.location.href = "./thankyou.html"
+        }, function(error) {
+            console.error('Email error:', error);
+            alert("An error occurred while sending the details.");
+        });
+  
+    // Clear form fields
+    document.getElementById('requestQuote').reset();
+  });
 
-  // Prepare email parameters
-  var params = {
-      from_builder: "Park East",
-      from_name: document.getElementById("nameb").value,
-      from_email: document.getElementById("emailb").value,
-      from_mnumber: "Mobile Number: " + document.getElementById("mnumberb").value,
-      from_bhk: selectedBHKOptions.length > 0 ? "Enquired for: " + selectedBHKOptions.join(", ") : "Enquired for: None",
-  };
+  document.getElementById('requestQuote2').addEventListener('submit', function (event) {
+    event.preventDefault();
+  
+    // Initialize EmailJS with your user ID
+    emailjs.init("KRks2szaYEUCKdkfM"); 
 
-  // Send email
-  emailjs.send("service_jgfvwvc", "template_q4t01zo" , params)
-      .then(function(response) {
-          document.getElementById("close_modal2").click();
-          window.location.href = "thankyou.html"
-      }, function(error) {
-          console.error('Email error:', error);
-          alert("An error occurred while sending the email.");
-      });
-
-  // Clear form fields
-  document.getElementById('requestQuote').reset();
-});
+    // Prepare email parameters
+    var params = {
+        from_builder: "Park East",
+        from_name: document.getElementById("namec").value,
+        from_email: document.getElementById("emailc").value,
+        from_mnumber: "Mobile Number: " + document.getElementById("mnumberc").value,
+    };
+  
+    // Send email
+    emailjs.send("service_jgfvwvc", "template_q4t01zo" , params)
+        .then(function(response) {
+            window.location.href = "./thankyou.html"
+        }, function(error) {
+            console.error('Email error:', error);
+            alert("An error occurred while sending the details.");
+        });
+  
+    // Clear form fields
+    document.getElementById('requestQuote').reset();
+  });
 
 
 
